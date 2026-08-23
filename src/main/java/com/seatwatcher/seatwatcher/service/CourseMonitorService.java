@@ -11,9 +11,14 @@ import java.util.List;
 public class CourseMonitorService {
 
     private final CourseRepository courseRepository;
+    private final EmailService emailService;
 
-    public CourseMonitorService(CourseRepository courseRepository) {
+    public CourseMonitorService(
+            CourseRepository courseRepository,
+            EmailService emailService) {
+
         this.courseRepository = courseRepository;
+        this.emailService = emailService;
     }
 
     @Scheduled(fixedRate = 30000)
@@ -31,6 +36,13 @@ public class CourseMonitorService {
                                 + course.getCourseCode()
                                 + " "
                                 + course.getSection()
+                );
+
+                emailService.sendSeatAvailableEmail(
+                        "YOUR_EMAIL@gmail.com",
+                        course.getCourseCode(),
+                        course.getSection(),
+                        course.getAvailableSeats()
                 );
             }
 
