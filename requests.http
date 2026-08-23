@@ -2,7 +2,11 @@ POST http://localhost:8080/courses
 Content-Type: application/json
 
 {
-  "courseCode": "CMSC330",
-  "section": "0201",
-  "availableSeats": 3
+  "courseCode": "CMSC351",
+  "section": "0101",
+  "availableSeats": 0
 }
+
+###
+
+GET http://localhost:8080/courses

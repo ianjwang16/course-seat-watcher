@@ -23,5 +23,28 @@ public class CourseService {
         return courseRepository.save(course);
     }
 
+    public Course getCourseById(Long id) {
+        return courseRepository.findById(id).orElse(null);
+    }
+
+    public Course updateCourse(Long id, Course updatedCourse) {
+
+        Course course = courseRepository.findById(id).orElse(null);
+
+        if (course == null) {
+            return null;
+        }
+
+        course.setCourseCode(updatedCourse.getCourseCode());
+        course.setSection(updatedCourse.getSection());
+        course.setAvailableSeats(updatedCourse.getAvailableSeats());
+
+        return courseRepository.save(course);
+    }
+
+    public void deleteCourse(Long id) {
+        courseRepository.deleteById(id);
+    }
+
 
 }
