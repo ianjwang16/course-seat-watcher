@@ -23,6 +23,8 @@ public class Course {
     @Min(0)
     private int availableSeats;
 
+    private int previousSeats;
+
     public Course() {
     }
 
@@ -66,5 +68,13 @@ public class Course {
         } else {
             return "CLOSED";
         }
+    }
+
+    public int getPreviousSeats() {
+        return previousSeats;
+    }
+
+    public void setPreviousSeats(int previousSeats) {
+        this.previousSeats = previousSeats;
     }
 }

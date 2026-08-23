@@ -1,46 +1,8 @@
-
-### Add course
-
-POST http://localhost:8080/courses
+PUT http://localhost:8080/courses/5
 Content-Type: application/json
 
 {
   "courseCode": "CMSC351",
   "section": "0101",
-  "availableSeats": 0
-}
-
-###
-
-POST http://localhost:8080/courses
-Content-Type: application/json
-
-{
-  "courseCode": "CMSC351",
-  "section": "0201",
   "availableSeats": 3
 }
-
-###
-
-POST http://localhost:8080/courses
-Content-Type: application/json
-
-{
-  "courseCode": "CMSC330",
-  "section": "0101",
-  "availableSeats": 1
-}
-
-### Get all
-
-GET http://localhost:8080/courses
-
-### Search CMSC351
-
-GET http://localhost:8080/courses/code/CMSC351
-
-### Get open courses
-
-GET http://localhost:8080/courses/open
-
