@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
-
+import jakarta.validation.Valid;
 
 
 import java.util.List;
@@ -32,7 +32,7 @@ public class CourseController {
 
     // ADD a new course
     @PostMapping("/courses")
-    public Course addCourse(@RequestBody Course course) {
+    public Course addCourse(@Valid @RequestBody Course course) {
         return courseService.addCourse(course);
     }
 
@@ -44,7 +44,7 @@ public class CourseController {
     @PutMapping("/courses/{id}")
     public Course updateCourse(
             @PathVariable Long id,
-            @RequestBody Course course) {
+            @Valid @RequestBody Course course) {
 
         return courseService.updateCourse(id, course);
     }
@@ -52,5 +52,17 @@ public class CourseController {
     @DeleteMapping("/courses/{id}")
     public void deleteCourse(@PathVariable Long id) {
         courseService.deleteCourse(id);
+    }
+
+    @GetMapping("/courses/code/{courseCode}")
+    public List<Course> getCoursesByCode(
+            @PathVariable String courseCode) {
+
+        return courseService.getCoursesByCode(courseCode);
+    }
+
+    @GetMapping("/courses/open")
+    public List<Course> getOpenCourses() {
+        return courseService.getOpenCourses();
     }
 }

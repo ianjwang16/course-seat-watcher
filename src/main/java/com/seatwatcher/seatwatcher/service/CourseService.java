@@ -46,5 +46,13 @@ public class CourseService {
         courseRepository.deleteById(id);
     }
 
+    public List<Course> getCoursesByCode(String courseCode) {
+        return courseRepository.findByCourseCode(courseCode);
+    }
+
+    public List<Course> getOpenCourses() {
+        return courseRepository.findByAvailableSeatsGreaterThan(0);
+    }
+
 
 }

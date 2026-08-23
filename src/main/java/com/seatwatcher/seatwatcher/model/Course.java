@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Course {
@@ -12,8 +14,13 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     private String courseCode;
+
+    @NotBlank
     private String section;
+
+    @Min(0)
     private int availableSeats;
 
     public Course() {
@@ -51,5 +58,13 @@ public class Course {
 
     public void setAvailableSeats(int availableSeats) {
         this.availableSeats = availableSeats;
+    }
+
+    public String getStatus() {
+        if (availableSeats > 0) {
+            return "OPEN";
+        } else {
+            return "CLOSED";
+        }
     }
 }
