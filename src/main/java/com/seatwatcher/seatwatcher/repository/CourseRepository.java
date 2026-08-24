@@ -9,4 +9,5 @@ public interface CourseRepository
 
     List<Course> findByCourseCode(String courseCode);
     List<Course> findByAvailableSeatsGreaterThan(int seats);
+    List<Course> findByWatchedTrue();
 }

@@ -65,4 +65,14 @@ public class CourseController {
     public List<Course> getOpenCourses() {
         return courseService.getOpenCourses();
     }
+
+    @PutMapping("/courses/{id}/watch")
+    public Course watchCourse(@PathVariable Long id) {
+        return courseService.setWatched(id, true);
+    }
+
+    @PutMapping("/courses/{id}/unwatch")
+    public Course unwatchCourse(@PathVariable Long id) {
+        return courseService.setWatched(id, false);
+    }
 }

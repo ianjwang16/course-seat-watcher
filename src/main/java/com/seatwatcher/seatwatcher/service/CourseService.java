@@ -54,5 +54,18 @@ public class CourseService {
         return courseRepository.findByAvailableSeatsGreaterThan(0);
     }
 
+    public Course setWatched(Long id, boolean watched) {
+
+        Course course = courseRepository.findById(id).orElse(null);
+
+        if (course == null) {
+            return null;
+        }
+
+        course.setWatched(watched);
+
+        return courseRepository.save(course);
+    }
+
 
 }

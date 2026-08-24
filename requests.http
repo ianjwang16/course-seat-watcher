@@ -1,8 +1,1 @@
-PUT http://localhost:8080/courses/8
-Content-Type: application/json
-
-{
-  "courseCode": "CMSC351",
-  "section": "0101",
-  "availableSeats": 5
-}
+PUT http://localhost:8080/courses/5/watch

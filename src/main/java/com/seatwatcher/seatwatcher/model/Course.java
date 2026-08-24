@@ -24,6 +24,7 @@ public class Course {
     private int availableSeats;
 
     private int previousSeats;
+    private boolean watched;
 
     public Course() {
     }
@@ -76,5 +77,13 @@ public class Course {
 
     public void setPreviousSeats(int previousSeats) {
         this.previousSeats = previousSeats;
+    }
+
+    public boolean isWatched() {
+        return watched;
+    }
+
+    public void setWatched(boolean watched) {
+        this.watched = watched;
     }
 }

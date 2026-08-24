@@ -24,7 +24,7 @@ public class CourseMonitorService {
     @Scheduled(fixedRate = 30000)
     public void checkCourseSeats() {
 
-        List<Course> courses = courseRepository.findAll();
+        List<Course> courses = courseRepository.findByWatchedTrue();
 
         for (Course course : courses) {
 
