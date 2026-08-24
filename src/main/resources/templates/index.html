@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Course Seat Watcher</title>
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<h1>Course Seat Watcher</h1>
+
+<h2>Add Course</h2>
+
+<form action="/web/courses" method="post">
+
+    <label>Course Code:</label>
+    <input type="text"
+           name="courseCode"
+           required>
+
+    <br><br>
+
+    <label>Section:</label>
+    <input type="text"
+           name="section"
+           required>
+
+    <br><br>
+
+    <label>Available Seats:</label>
+    <input type="number"
+           name="availableSeats"
+           min="0"
+           required>
+
+    <br><br>
+
+    <button type="submit">
+        Add Course
+    </button>
+
+</form>
+
+
+<h2>Courses</h2>
+
+<table border="1">
+
+    <tr>
+        <th>Course</th>
+        <th>Section</th>
+        <th>Seats</th>
+        <th>Status</th>
+        <th>Watched</th>
+        <th>Actions</th>
+    </tr>
+
+    <tr th:each="course : ${courses}">
+
+        <td th:text="${course.courseCode}"></td>
+
+        <td th:text="${course.section}"></td>
+
+        <td th:text="${course.availableSeats}"></td>
+
+        <td th:text="${course.status}"></td>
+
+        <td th:text="${course.watched}"></td>
+
+        <td>
+
+            <form th:if="${!course.watched}"
+                  th:action="@{/web/courses/{id}/watch(id=${course.id})}"
+                  method="post">
+
+                <button type="submit">
+                    Watch
+                </button>
+
+            </form>
+
+            <form th:if="${course.watched}"
+                  th:action="@{/web/courses/{id}/unwatch(id=${course.id})}"
+                  method="post">
+
+                <button type="submit">
+                    Unwatch
+                </button>
+
+            </form>
+
+            <form th:action="@{/web/courses/{id}/delete(id=${course.id})}"
+                  method="post">
+
+                <button type="submit">
+                    Delete
+                </button>
+
+            </form>
+
+        </td>
+
+    </tr>
+
+</table>
+
+</body>
+</html>
