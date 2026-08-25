@@ -1,3 +1,8 @@
+## Live Demo
+
+The application is deployed online with Railway.
+
+https://course-seat-watcher-production.up.railway.app/
 # Course Seat Watcher
 
 Course Seat Watcher is a full-stack web application built with Java and Spring Boot that allows students to monitor course seat availability and receive email notifications when seats become available.
@@ -32,15 +37,19 @@ Course Seat Watcher is a full-stack web application built with Java and Spring B
 
 The application follows a layered Spring Boot architecture:
 
-Browser / Thymeleaf UI  
-↓  
-Controller  
-↓  
-Service  
-↓  
-Repository  
-↓  
+```text
+Browser
+   ↓
+Railway Spring Boot Application
+   ↓
 PostgreSQL
+   ↓
+Testudo Live Course Data
+   ↓
+Scheduled Monitoring
+   ↓
+Email Notification
+```
 
 A scheduled background service periodically checks watched courses for changes in seat availability. When a course changes from closed to open, the application sends an email notification.
 
