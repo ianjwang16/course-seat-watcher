@@ -26,6 +26,7 @@ public class Course {
     private int previousSeats;
     private boolean watched;
     private String sourceUrl;
+    private String term;
 
     public Course() {
     }
@@ -94,5 +95,13 @@ public class Course {
 
     public void setSourceUrl(String sourceUrl) {
         this.sourceUrl = sourceUrl;
+    }
+
+    public String getTerm() {
+        return term;
+    }
+
+    public void setTerm(String term) {
+        this.term = term;
     }
 }

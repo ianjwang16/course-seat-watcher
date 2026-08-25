@@ -36,6 +36,7 @@ public class CourseMonitorService {
 
             int newSeats =
                     courseScraperService.getAvailableSeats(
+                            course.getTerm(),
                             course.getCourseCode(),
                             course.getSection()
                     );

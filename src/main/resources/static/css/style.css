@@ -77,3 +77,12 @@ td form {
     display: inline-block;
     margin-right: 5px;
 }
+
+.error-message {
+    background: #ffe0e0;
+    color: #a61b1b;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}

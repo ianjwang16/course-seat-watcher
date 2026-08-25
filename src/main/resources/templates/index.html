@@ -18,6 +18,11 @@
 
     <h2>Add Course</h2>
 
+    <div class="error-message"
+         th:if="${error}"
+         th:text="${error}">
+    </div>
+
     <form action="/web/courses" method="post">
 
         <label>Course Code:</label>
@@ -34,12 +39,20 @@
 
         <br><br>
 
-        <label>Available Seats:</label>
-        <input type="number"
-               name="availableSeats"
-               min="0"
-               required>
+        <label>Term:</label>
 
+        <select name="term" required>
+
+            <option value="">
+                Select a term
+            </option>
+
+            <option th:each="term : ${terms}"
+                    th:value="${term.key}"
+                    th:text="${term.value}">
+            </option>
+
+        </select>
         <br><br>
 
         <button type="submit">

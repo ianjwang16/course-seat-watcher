@@ -3,11 +3,17 @@ package com.seatwatcher.seatwatcher.service;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.stereotype.Service;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Service
 public class CourseScraperService {
 
     public int getAvailableSeats(
+            String term,
             String courseCode,
             String section) {
 
@@ -17,7 +23,9 @@ public class CourseScraperService {
                     courseCode.substring(0, 4);
 
             String url =
-                    "https://app.testudo.umd.edu/soc/202608/"
+                    "https://app.testudo.umd.edu/soc/"
+                            + term
+                            + "/"
                             + department
                             + "/"
                             + courseCode;
@@ -62,5 +70,40 @@ public class CourseScraperService {
 
             return -1;
         }
+    }
+
+    public Map<String, String> getAvailableTerms() {
+
+        Map<String, String> terms = new LinkedHashMap<>();
+
+        try {
+            Document document =
+                    Jsoup.connect("https://app.testudo.umd.edu/soc/").get();
+
+            Elements options =
+                    document.select("select option");
+
+            for (Element option : options) {
+
+                String value = option.attr("value");
+                String text = option.text().trim();
+
+                if (!value.isBlank()
+                        && !text.isBlank()
+                        && value.matches("\\d{6}")) {
+
+                    terms.put(value, text);
+                }
+            }
+
+        } catch (Exception e) {
+
+            System.out.println(
+                    "Failed to retrieve terms: "
+                            + e.getMessage()
+            );
+        }
+
+        return terms;
     }
 }

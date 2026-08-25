@@ -82,12 +82,4 @@ public class CourseController {
         return courseService.setWatched(id, false);
     }
 
-    @GetMapping("/test-scrape")
-    public int testScrape() {
-
-        return courseScraperService.getAvailableSeats(
-                "CMSC351",
-                "0201"
-        );
-    }
 }
