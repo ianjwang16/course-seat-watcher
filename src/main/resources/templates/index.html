@@ -3,108 +3,120 @@
 
 <head>
     <title>Course Seat Watcher</title>
-    <link rel="stylesheet"
-          th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
 
-<h1>Course Seat Watcher</h1>
+<div class="container">
 
-<h2>Add Course</h2>
+    <h1>Course Seat Watcher</h1>
 
-<form action="/web/courses" method="post">
+    <p class="subtitle">
+        Monitor course availability and get notified when a seat opens.
+    </p>
 
-    <label>Course Code:</label>
-    <input type="text"
-           name="courseCode"
-           required>
+    <h2>Add Course</h2>
 
-    <br><br>
+    <form action="/web/courses" method="post">
 
-    <label>Section:</label>
-    <input type="text"
-           name="section"
-           required>
+        <label>Course Code:</label>
+        <input type="text"
+               name="courseCode"
+               required>
 
-    <br><br>
+        <br><br>
 
-    <label>Available Seats:</label>
-    <input type="number"
-           name="availableSeats"
-           min="0"
-           required>
+        <label>Section:</label>
+        <input type="text"
+               name="section"
+               required>
 
-    <br><br>
+        <br><br>
 
-    <button type="submit">
-        Add Course
-    </button>
+        <label>Available Seats:</label>
+        <input type="number"
+               name="availableSeats"
+               min="0"
+               required>
 
-</form>
+        <br><br>
+
+        <button type="submit">
+            Add Course
+        </button>
+
+    </form>
 
 
-<h2>Courses</h2>
+    <h2>My Courses</h2>
 
-<table border="1">
+    <table>
 
-    <tr>
-        <th>Course</th>
-        <th>Section</th>
-        <th>Seats</th>
-        <th>Status</th>
-        <th>Watched</th>
-        <th>Actions</th>
-    </tr>
+        <tr>
+            <th>Course</th>
+            <th>Section</th>
+            <th>Seats</th>
+            <th>Status</th>
+            <th>Watched</th>
+            <th>Actions</th>
+        </tr>
 
-    <tr th:each="course : ${courses}">
+        <tr th:each="course : ${courses}">
 
-        <td th:text="${course.courseCode}"></td>
+            <td th:text="${course.courseCode}"></td>
 
-        <td th:text="${course.section}"></td>
+            <td th:text="${course.section}"></td>
 
-        <td th:text="${course.availableSeats}"></td>
+            <td th:text="${course.availableSeats}"></td>
 
-        <td th:text="${course.status}"></td>
+            <td>
+                <span class="status"
+                      th:classappend="${course.status == 'OPEN'} ? ' open' : ' closed'"
+                      th:text="${course.status}">
+                </span>
+            </td>
 
-        <td th:text="${course.watched}"></td>
+            <td th:text="${course.watched}"></td>
 
-        <td>
+            <td>
 
-            <form th:if="${!course.watched}"
-                  th:action="@{/web/courses/{id}/watch(id=${course.id})}"
-                  method="post">
+                <form th:if="${!course.watched}"
+                      th:action="@{/web/courses/{id}/watch(id=${course.id})}"
+                      method="post">
 
-                <button type="submit">
-                    Watch
-                </button>
+                    <button type="submit">
+                        Watch
+                    </button>
 
-            </form>
+                </form>
 
-            <form th:if="${course.watched}"
-                  th:action="@{/web/courses/{id}/unwatch(id=${course.id})}"
-                  method="post">
+                <form th:if="${course.watched}"
+                      th:action="@{/web/courses/{id}/unwatch(id=${course.id})}"
+                      method="post">
 
-                <button type="submit">
-                    Unwatch
-                </button>
+                    <button type="submit">
+                        Unwatch
+                    </button>
 
-            </form>
+                </form>
 
-            <form th:action="@{/web/courses/{id}/delete(id=${course.id})}"
-                  method="post">
+                <form th:action="@{/web/courses/{id}/delete(id=${course.id})}"
+                      method="post">
 
-                <button type="submit">
-                    Delete
-                </button>
+                    <button type="submit">
+                        Delete
+                    </button>
 
-            </form>
+                </form>
 
-        </td>
+            </td>
 
-    </tr>
+        </tr>
 
-</table>
+    </table>
+
+</div>
 
 </body>
 </html>

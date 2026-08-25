@@ -103,5 +103,71 @@ public class CourseServiceTest {
 
         verify(courseRepository).save(course);
     }
+
+    @Test
+    void deleteCourseDeletesById() {
+
+        Long id = 1L;
+
+        courseService.deleteCourse(id);
+
+        verify(courseRepository).deleteById(id);
+    }
+
+    @Test
+    void updateCourseUpdatesCourse() {
+
+        Long id = 1L;
+
+        Course existingCourse =
+                new Course("CMSC351", "0101", 0);
+
+        Course updatedCourse =
+                new Course("CMSC351", "0101", 3);
+
+        when(courseRepository.findById(id))
+                .thenReturn(Optional.of(existingCourse));
+
+        when(courseRepository.save(existingCourse))
+                .thenReturn(existingCourse);
+
+        Course result =
+                courseService.updateCourse(id, updatedCourse);
+
+        assertNotNull(result);
+
+        assertEquals(
+                3,
+                result.getAvailableSeats()
+        );
+
+        verify(courseRepository).findById(id);
+        verify(courseRepository).save(existingCourse);
+    }
+
+    @Test
+    void getOpenCoursesReturnsOnlyOpenCourses() {
+
+        Course course1 =
+                new Course("CMSC351", "0101", 3);
+
+        Course course2 =
+                new Course("CMSC330", "0201", 1);
+
+        List<Course> openCourses =
+                List.of(course1, course2);
+
+        when(courseRepository
+                .findByAvailableSeatsGreaterThan(0))
+                .thenReturn(openCourses);
+
+        List<Course> result =
+                courseService.getOpenCourses();
+
+        assertEquals(2, result.size());
+
+        verify(courseRepository)
+                .findByAvailableSeatsGreaterThan(0);
+    }
 }
 
