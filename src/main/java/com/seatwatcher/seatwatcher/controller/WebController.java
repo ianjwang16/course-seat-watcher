@@ -26,7 +26,8 @@ public class WebController {
     public String addCourse(
             @RequestParam String courseCode,
             @RequestParam String section,
-            @RequestParam String term) {
+            @RequestParam String term,
+            @RequestParam String email) {
 
         int availableSeats =
                 courseScraperService.getAvailableSeats(
@@ -40,9 +41,15 @@ public class WebController {
         }
 
         Course course =
-                new Course(courseCode, section, availableSeats);
+                new Course(
+                        courseCode,
+                        section,
+                        availableSeats
+                );
 
         course.setTerm(term);
+        course.setEmail(email);
+        course.setWatched(true);
 
         courseService.addCourse(course);
 

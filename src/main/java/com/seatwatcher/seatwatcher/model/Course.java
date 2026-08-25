@@ -27,6 +27,7 @@ public class Course {
     private boolean watched;
     private String sourceUrl;
     private String term;
+    private String email;
 
     public Course() {
     }
@@ -103,5 +104,13 @@ public class Course {
 
     public void setTerm(String term) {
         this.term = term;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

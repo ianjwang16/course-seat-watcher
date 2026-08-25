@@ -67,7 +67,7 @@ public class CourseMonitorService {
                 );
 
                 emailService.sendSeatAvailableEmail(
-                        "YOUR_EMAIL@gmail.com",
+                        course.getEmail(),
                         course.getCourseCode(),
                         course.getSection(),
                         newSeats
