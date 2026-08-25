@@ -2,6 +2,7 @@ package com.seatwatcher.seatwatcher.controller;
 
 import com.seatwatcher.seatwatcher.model.Course;
 import com.seatwatcher.seatwatcher.service.CourseService;
+import com.seatwatcher.seatwatcher.service.CourseScraperService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,9 +20,14 @@ import java.util.List;
 public class CourseController {
 
     private final CourseService courseService;
+    private final CourseScraperService courseScraperService;
 
-    public CourseController(CourseService courseService) {
+    public CourseController(
+            CourseService courseService,
+            CourseScraperService courseScraperService) {
+
         this.courseService = courseService;
+        this.courseScraperService = courseScraperService;
     }
 
     // GET all courses
@@ -74,5 +80,14 @@ public class CourseController {
     @PutMapping("/courses/{id}/unwatch")
     public Course unwatchCourse(@PathVariable Long id) {
         return courseService.setWatched(id, false);
+    }
+
+    @GetMapping("/test-scrape")
+    public int testScrape() {
+
+        return courseScraperService.getAvailableSeats(
+                "CMSC351",
+                "0201"
+        );
     }
 }

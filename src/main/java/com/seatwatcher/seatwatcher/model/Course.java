@@ -25,6 +25,7 @@ public class Course {
 
     private int previousSeats;
     private boolean watched;
+    private String sourceUrl;
 
     public Course() {
     }
@@ -85,5 +86,13 @@ public class Course {
 
     public void setWatched(boolean watched) {
         this.watched = watched;
+    }
+
+    public String getSourceUrl() {
+        return sourceUrl;
+    }
+
+    public void setSourceUrl(String sourceUrl) {
+        this.sourceUrl = sourceUrl;
     }
 }

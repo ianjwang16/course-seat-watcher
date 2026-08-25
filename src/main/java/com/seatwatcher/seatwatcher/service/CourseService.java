@@ -3,6 +3,8 @@ package com.seatwatcher.seatwatcher.service;
 import com.seatwatcher.seatwatcher.model.Course;
 import com.seatwatcher.seatwatcher.repository.CourseRepository;
 import org.springframework.stereotype.Service;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import java.util.List;
 
